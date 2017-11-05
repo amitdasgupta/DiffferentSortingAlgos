@@ -21,11 +21,32 @@ void bubbleSort(int* &arr,int n)
 
     }
 }
+/**********************selection sort algorithm*///////////////////////////
+void selectionSort(int* &arr,int n)
+{
+    int min_,temp,j;
+    for(int i=0;i<n-1;i++)
+    {
+        min_=i;
+        for(j=i;j<n;j++)
+        {
+            if(arr[j]<arr[min_])
+                min_=j;
+        }
+        if(i!=min_)
+        {
+            temp=arr[i];
+            arr[i]=arr[min_];
+            arr[min_]=temp;
+        }
+    }
+}
 void printArray(int *arr,int n)
 {
     for(int i=0;i<n;i++)
         cout<<arr[i]<< " ";
 }
+
 int main()
 {
     int n,*arr,temp;
@@ -36,7 +57,8 @@ int main()
       {
           cin>>arr[i];
       }
-    bubbleSort(arr,n);
+    //bubbleSort(arr,n);
+    selectionSort(arr,n);
     printArray(arr,n);
     return 0;
 }
