@@ -57,6 +57,48 @@ void insertionSort(int* &arr,int n)
         arr[j]=v;
     }
 }
+/*******************merge sort algorithm*///////////////////////
+void mergeIt(int* &arr,int start,int mid,int last)
+{
+    //cout<<"amit";
+    int n1=mid-start,i,j=0;
+    int n2=last-mid+1;
+    int *arr1=new int[n1+1];
+    int *arr2=new int[n2+1];
+    for(i=0;i<n1;i++)
+        arr1[i]=arr[start+i];
+    arr1[n1]=INT_MAX;
+    for(i=0;i<n2;i++)
+        arr2[i]=arr[mid+i];
+    arr2[n2]=INT_MAX;
+    i=0,j=0;
+    for(int k=start;k<=last;k++)
+    {
+        if(arr1[i]<arr2[j])
+        {
+            arr[k]=arr1[i];
+            i++;
+        }
+        else
+        {
+            arr[k]=arr2[j];
+            j++;
+        }
+    }
+    delete[] arr1;
+    delete[] arr2;
+}
+void mergeSort(int* &arr,int start,int last)
+{    if(start>=last)
+        return;
+    else
+    {
+        int mid=(last+start+1)/2;
+        mergeSort(arr,start,mid-1);
+        mergeSort(arr,mid,last);
+        mergeIt(arr,start,mid,last);
+    }
+}
 void printArray(int *arr,int n)
 {
     for(int i=0;i<n;i++)
@@ -75,7 +117,8 @@ int main()
       }
     //bubbleSort(arr,n);
     //selectionSort(arr,n);
-    insertionSort(arr,n);
+    //insertionSort(arr,n);
+    mergeSort(arr,0,n-1);
     printArray(arr,n);
     delete[] arr;
     return 0;
