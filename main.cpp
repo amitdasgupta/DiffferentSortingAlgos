@@ -41,6 +41,22 @@ void selectionSort(int* &arr,int n)
         }
     }
 }
+/**************************insertion sort algorithm*////////////////////////////////////
+void insertionSort(int* &arr,int n)
+{
+    int j,v;
+    for(int i=1;i<n;i++)
+    {
+        j=i;
+        v=arr[i];
+        while(j>0&&arr[j-1]>v)
+        {
+            arr[j]=arr[j-1];
+            j--;
+        }
+        arr[j]=v;
+    }
+}
 void printArray(int *arr,int n)
 {
     for(int i=0;i<n;i++)
@@ -58,7 +74,9 @@ int main()
           cin>>arr[i];
       }
     //bubbleSort(arr,n);
-    selectionSort(arr,n);
+    //selectionSort(arr,n);
+    insertionSort(arr,n);
     printArray(arr,n);
+    delete[] arr;
     return 0;
 }
