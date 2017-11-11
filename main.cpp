@@ -1,5 +1,6 @@
 #include <iostream>
-
+#include<map>
+#define pp pair<int,int>
 using namespace std;
 /**************bubble sort algorithm
 void bubbleSort(int* &arr,int n)
@@ -102,6 +103,7 @@ void mergeSort(int* &arr,int start,int last)
         mergeIt(arr,start,mid,last);
     }
 }*///////////////////////
+/*****************
 int partitionForQuickSort(int* &arr,int start,int last)
 {
 
@@ -137,7 +139,8 @@ void quickSort(int* &arr,int start,int last)
         quickSort(arr,start,pivot-1);
         quickSort(arr,pivot+1,last);
     }
-}
+}*///////////////////////////////
+
 void printArray(int *arr,int n)
 {
     for(int i=0;i<n;i++)
@@ -147,8 +150,8 @@ void printArray(int *arr,int n)
 
 int main()
 {
-    int n,*arr,temp;
-    cout<<"enter the number oof the elements"<<endl;
+    int n,k,*arr,temp,*sorted;
+    /***cout<<"enter the number oof the elements"<<endl;
     cin>>n;
     arr=new int[n]();
       for(int i=0;i<n;i++)
@@ -160,7 +163,33 @@ int main()
     //insertionSort(arr,n);
     //mergeSort(arr,0,n-1);
     quickSort(arr,0,n-1);
-    printArray(arr,n);
+    printArray(arr,n);*////
+    cin>>n>>k;
+    arr=new int[n]();
+    sorted=new int[n]();
+    map<int,int> map_;
+    for(int i=0;i<=k;i++)
+        map_.insert(pp(i,0));
+    for(int i=0;i<n;i++)
+    {
+        cin>>arr[i];
+        ++map_[arr[i]];
+    }
+    int sum=map_[0];
+    for(int i=1;i<=k;i++)
+    {
+        sum+=map_[i];
+        map_[i]=sum;
+
+    }
+    int curr;
+    for(int i=0;i<n;i++)
+    {
+        curr=arr[i];
+        sorted[map_[curr]-1]=curr;
+        map_[curr]--;
+    }
+    printArray(sorted,n);
     delete[] arr;
     return 0;
 }
