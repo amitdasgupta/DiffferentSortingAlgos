@@ -1,7 +1,7 @@
 #include <iostream>
 
 using namespace std;
-/**************bubble sort algorithm*////////////////
+/**************bubble sort algorithm
 void bubbleSort(int* &arr,int n)
 {
     int j=n-2,temp,isSwapp=1;
@@ -21,7 +21,8 @@ void bubbleSort(int* &arr,int n)
 
     }
 }
-/**********************selection sort algorithm*///////////////////////////
+*////////////////
+/**********************selection sort algorithm*
 void selectionSort(int* &arr,int n)
 {
     int min_,temp,j;
@@ -41,7 +42,8 @@ void selectionSort(int* &arr,int n)
         }
     }
 }
-/**************************insertion sort algorithm*////////////////////////////////////
+///////////////////////////
+/**************************insertion sort algorithm
 void insertionSort(int* &arr,int n)
 {
     int j,v;
@@ -57,7 +59,8 @@ void insertionSort(int* &arr,int n)
         arr[j]=v;
     }
 }
-/*******************merge sort algorithm*///////////////////////
+*////////////////////////////////////
+/*******************merge sort algorithm
 void mergeIt(int* &arr,int start,int mid,int last)
 {
     //cout<<"amit";
@@ -98,11 +101,48 @@ void mergeSort(int* &arr,int start,int last)
         mergeSort(arr,mid,last);
         mergeIt(arr,start,mid,last);
     }
+}*///////////////////////
+int partitionForQuickSort(int* &arr,int start,int last)
+{
+
+    int pivot=arr[last],temp;
+    //cout<<pivot<<" ";
+    int i=start-1;
+    for(int k=start;k<last;k++)
+    {
+        if(arr[k]<=pivot)
+        {
+            i++;
+           temp=arr[k];
+           arr[k]=arr[i];
+           arr[i]=temp;
+
+        }
+    }
+    i++;
+    temp=arr[i];
+    arr[i]=arr[last];
+    arr[last]=temp;
+    return i;
+}
+void quickSort(int* &arr,int start,int last)
+{
+    if(start>=last)
+        return;
+    else
+    {
+
+        int pivot=partitionForQuickSort(arr,start,last);
+      //  cout<<pivot<<" ";
+        quickSort(arr,start,pivot-1);
+        quickSort(arr,pivot+1,last);
+    }
 }
 void printArray(int *arr,int n)
 {
     for(int i=0;i<n;i++)
         cout<<arr[i]<< " ";
+        cout<<endl;
 }
 
 int main()
@@ -118,7 +158,8 @@ int main()
     //bubbleSort(arr,n);
     //selectionSort(arr,n);
     //insertionSort(arr,n);
-    mergeSort(arr,0,n-1);
+    //mergeSort(arr,0,n-1);
+    quickSort(arr,0,n-1);
     printArray(arr,n);
     delete[] arr;
     return 0;
