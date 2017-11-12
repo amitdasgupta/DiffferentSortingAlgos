@@ -103,7 +103,7 @@ void mergeSort(int* &arr,int start,int last)
         mergeIt(arr,start,mid,last);
     }
 }*///////////////////////
-/*****************
+
 int partitionForQuickSort(int* &arr,int start,int last)
 {
 
@@ -139,8 +139,31 @@ void quickSort(int* &arr,int start,int last)
         quickSort(arr,start,pivot-1);
         quickSort(arr,pivot+1,last);
     }
-}*///////////////////////////////
+}
+/*************finding repition data in any array*////////////
+void findRepaetingNumberInArray(int *arr,int n)
+{
+    cout<<"\n";
+    int i=0,temp,flag=0;
+    while(i<n)
+    {
+        flag=0;
+        temp=arr[i];
+        if(temp==arr[i+1])
+        while(temp==arr[i+1])
+        {
+            if(!flag)
+              {
+                  flag=1;
+                    cout<<temp<<" ";
+              }
+            i++;
+        }
+        else
+            i++;
 
+    }
+}
 void printArray(int *arr,int n)
 {
     for(int i=0;i<n;i++)
@@ -151,7 +174,7 @@ void printArray(int *arr,int n)
 int main()
 {
     int n,k,*arr,temp,*sorted;
-    /***cout<<"enter the number oof the elements"<<endl;
+    cout<<"enter the number oof the elements"<<endl;
     cin>>n;
     arr=new int[n]();
       for(int i=0;i<n;i++)
@@ -163,7 +186,11 @@ int main()
     //insertionSort(arr,n);
     //mergeSort(arr,0,n-1);
     quickSort(arr,0,n-1);
-    printArray(arr,n);*////
+    printArray(arr,n);
+    findRepaetingNumberInArray(arr,n);
+    /*************finding repition data in any array*////////////
+
+    /***************************counting sort
     cin>>n>>k;
     arr=new int[n]();
     sorted=new int[n]();
@@ -190,6 +217,8 @@ int main()
         map_[curr]--;
     }
     printArray(sorted,n);
+    delete[] arr;
+    delete[] sorted;*/
     delete[] arr;
     return 0;
 }
