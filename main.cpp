@@ -143,26 +143,34 @@ void quickSort(int* &arr,int start,int last)
 /*************finding repition data in any array*////////////
 void findRepaetingNumberInArray(int *arr,int n)
 {
+    int maxi=INT_MIN,maxiCand,currcount;
     cout<<"\n";
     int i=0,temp,flag=0;
     while(i<n)
     {
+        currcount=1;
         flag=0;
         temp=arr[i];
         if(temp==arr[i+1])
         while(temp==arr[i+1])
         {
-            if(!flag)
+            currcount++;
+            /*if(!flag)
               {
                   flag=1;
-                    cout<<temp<<" ";
-              }
+                  cout<<temp<<" ";
+              }*/
             i++;
         }
-        else
             i++;
+        if(currcount>maxi)
+        {
+            maxi=currcount;
+            maxiCand=temp;
+        }
 
     }
+    cout<<maxiCand<<" "<<maxi;
 }
 void printArray(int *arr,int n)
 {
