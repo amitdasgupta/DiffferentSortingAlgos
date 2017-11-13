@@ -181,7 +181,7 @@ bool isBinary(int *arr,int start,int last,int data)
     else
     {
         int mid=(last+start)/2;
-        cout<<mid<<endl;
+       // cout<<mid<<endl;
         if(arr[mid]==data)
             return true;
         else
@@ -202,26 +202,42 @@ void printArray(int *arr,int n)
 
 int main()
 {
-    int n,k,*arr,temp,*sorted;
-    cout<<"enter the number oof the elements"<<endl;
+
+    int n,k,*arr,temp,*arr2,flag=0;
+    cout<<"enter the number of the elements"<<endl;
     cin>>n;
     arr=new int[n]();
+    arr2=new int[n]();
       for(int i=0;i<n;i++)
       {
           cin>>arr[i];
       }
-    //bubbleSort(arr,n);
-    //selectionSort(arr,n);
-    //insertionSort(arr,n);
-    //mergeSort(arr,0,n-1);
+      cout<<"\n enter second array elemnts"<<endl;
+      for(int i=0;i<n;i++)
+      {
+          cin>>arr2[i];
+      }
     quickSort(arr,0,n-1);
-    printArray(arr,n);
-    cout<<"\nenter the number you want to find";
+    cin>>k;
+    cout<<endl;
+    for(int i=0;i<n&&!flag;i++)
+    {
+        if(isBinary(arr2,0,n-1,k-arr[i]))
+           {
+                cout<<"given sum exist"<<endl;
+                flag=1;
+           }
+
+    }
+    if(!flag)
+        cout<<"sum does not exist"<<endl;
+    /**binary search use
+    cout<<"\nenter the number you want to find"<<endl;
     cin>>temp;
     if(isBinary(arr,0,n-1,temp))
         cout<<"\n data found";
     else
-        cout<<"\n data is not found";
+        cout<<"\n data is not found";*/////////////
     //findRepaetingNumberInArray(arr,n);
     /*************finding repition data in any array*////////////
 
