@@ -172,6 +172,27 @@ void findRepaetingNumberInArray(int *arr,int n)
     }
     cout<<maxiCand<<" "<<maxi;
 }
+
+/********************************************code for binary search*////////////
+bool isBinary(int *arr,int start,int last,int data)
+{
+    if(start>last)
+        return false;
+    else
+    {
+        int mid=(last+start)/2;
+        cout<<mid<<endl;
+        if(arr[mid]==data)
+            return true;
+        else
+            if(data>arr[mid])
+            return isBinary(arr,mid+1,last,data);
+        else
+             return isBinary(arr,start,mid-1,data);
+    }
+
+
+}
 void printArray(int *arr,int n)
 {
     for(int i=0;i<n;i++)
@@ -195,7 +216,13 @@ int main()
     //mergeSort(arr,0,n-1);
     quickSort(arr,0,n-1);
     printArray(arr,n);
-    findRepaetingNumberInArray(arr,n);
+    cout<<"\nenter the number you want to find";
+    cin>>temp;
+    if(isBinary(arr,0,n-1,temp))
+        cout<<"\n data found";
+    else
+        cout<<"\n data is not found";
+    //findRepaetingNumberInArray(arr,n);
     /*************finding repition data in any array*////////////
 
     /***************************counting sort
