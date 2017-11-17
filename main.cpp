@@ -1,7 +1,16 @@
 #include <iostream>
 #include<map>
+#include<algorithm>
 #define pp pair<int,int>
+#include<vector>
 using namespace std;
+class MyComp{
+public:
+    bool operator()(int &a,int &b)
+    {
+        return a>b;
+    }
+};
 /**************bubble sort algorithm
 void bubbleSort(int* &arr,int n)
 {
@@ -193,6 +202,29 @@ bool isBinary(int *arr,int start,int last,int data)
 
 
 }
+/*Sort a nearly sorted (or K sorted) array*/
+int* fullySortedArrayFromKSorted(int* arr,int n,int k)
+{
+    vector<int> vec(arr,arr+k+1);
+    make_heap(vec.begin(),vec.begin()+k,MyComp());
+    int i=0,temp,j=k+1,*res;
+    res=new int[n];
+    while(i<n)
+    {
+        temp=*vec.begin();
+       // cout<<*vec.begin()<<" ";
+        pop_heap(vec.begin(),vec.end(),MyComp());
+        cout<<vec.back()<<endl;
+        vec.pop_back();
+        res[i++]=temp;
+        if(j<n)
+        {
+            vec.push_back(arr[j++]);
+        push_heap(vec.begin(),vec.end(),MyComp());
+        }
+    }
+    return res;
+}
 void printArray(int *arr,int n)
 {
     for(int i=0;i<n;i++)
@@ -203,73 +235,14 @@ void printArray(int *arr,int n)
 int main()
 {
 
-    int n,k,*arr,temp,*arr2,flag=0;
+    int n,*arr,i,j,k;
     cout<<"enter the number of the elements"<<endl;
-    cin>>n;
-    arr=new int[n]();
-    arr2=new int[n]();
-      for(int i=0;i<n;i++)
-      {
-          cin>>arr[i];
-      }
-      cout<<"\n enter second array elemnts"<<endl;
-      for(int i=0;i<n;i++)
-      {
-          cin>>arr2[i];
-      }
-    quickSort(arr,0,n-1);
-    cin>>k;
-    cout<<endl;
-    for(int i=0;i<n&&!flag;i++)
-    {
-        if(isBinary(arr2,0,n-1,k-arr[i]))
-           {
-                cout<<"given sum exist"<<endl;
-                flag=1;
-           }
-
-    }
-    if(!flag)
-        cout<<"sum does not exist"<<endl;
-    /**binary search use
-    cout<<"\nenter the number you want to find"<<endl;
-    cin>>temp;
-    if(isBinary(arr,0,n-1,temp))
-        cout<<"\n data found";
-    else
-        cout<<"\n data is not found";*/////////////
-    //findRepaetingNumberInArray(arr,n);
-    /*************finding repition data in any array*////////////
-
-    /***************************counting sort
     cin>>n>>k;
     arr=new int[n]();
-    sorted=new int[n]();
-    map<int,int> map_;
-    for(int i=0;i<=k;i++)
-        map_.insert(pp(i,0));
     for(int i=0;i<n;i++)
-    {
         cin>>arr[i];
-        ++map_[arr[i]];
-    }
-    int sum=map_[0];
-    for(int i=1;i<=k;i++)
-    {
-        sum+=map_[i];
-        map_[i]=sum;
-
-    }
-    int curr;
-    for(int i=0;i<n;i++)
-    {
-        curr=arr[i];
-        sorted[map_[curr]-1]=curr;
-        map_[curr]--;
-    }
-    printArray(sorted,n);
-    delete[] arr;
-    delete[] sorted;*/
+    int* res=fullySortedArrayFromKSorted(arr,n,k);
+    printArray(res,n);
     delete[] arr;
     return 0;
 }
